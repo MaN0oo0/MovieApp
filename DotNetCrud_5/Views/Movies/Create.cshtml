@@ -1,0 +1,81 @@
+﻿@{ 
+    ViewData["Title"] = "Create";
+}
+@model MovieVM
+<h2>
+    Create New Movie &nbsp;<i class="bi bi-film"></i>
+</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input type="text" asp-for="Title" placeholder="Enter Movie Title" class="form-control" maxlength="250" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenreId"></label>
+                <select class="form-control" asp-for="GenreId" asp-items="@(new SelectList(Model.Genres,"Id","Name"))">
+                    <option></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Year"></label>
+                <input type="number" asp-for="Year" class="form-control" value="" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Rate"></label>
+                <input type="number" asp-for="Rate" placeholder="Enter Movie Rate" class="form-control" />
+                <span asp-validation-for="Rate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StoryLine"></label>
+                <textarea asp-for="StoryLine" class="form-control" maxlength="2500" rows="4"></textarea>
+                <span asp-validation-for="StoryLine" class="text-danger"></span>
+
+            </div>
+
+            <div class="custom-file">
+                <input type="file" asp-for="Poster" class="custom-file-input" accept="Image/*"/>
+                <label asp-for="Poster" class="custom-file-label"></label><br />
+                <span asp-validation-for="Poster" class="text-danger"></span>
+            </div>
+
+            <center class=" p-3">
+                <button type="submit" class="btn btn-primary w-50 mb-3"><i class="bi bi-plus">&nbsp; Add</i></button>
+                <a class="btn btn-secondary w-50 mb-3" asp-action="Index"> <i class="bi bi-arrow-return-left">&nbsp; Return</i></a>
+                <button type="reset" class="btn btn-warning  w-50" onclick="confirm(` Do You Want To Delete Form Data `)"><i class="bi bi-x-circle">&nbsp; Clear</i> </button>
+            </center>
+
+
+
+
+        </form>
+    </div>
+    <div class="col-md-4">
+        <div id="poster-container" class="d-none">
+            <img src="" alt="Poster" class="img-thumbnail" />
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('#Poster').on('change', function () {
+                var SelectedFile = $(this).val().split('\\').pop();
+                $(this).siblings('label').text(SelectedFile);
+                var posterContainer = $('#poster-container');
+                posterContainer.removeClass('d-none');
+                var Image = window.URL.createObjectURL(this.files[0]);
+                posterContainer.find('img').attr('src', Image);
+
+            });
+        });
+    </script>
+}
+
