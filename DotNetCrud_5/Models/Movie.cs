@@ -24,4 +24,6 @@ namespace DotNetCrud_5.Models
         [ForeignKey("GenreId")]
         public Genre Genre { get; set; }
     }
+
+
 }

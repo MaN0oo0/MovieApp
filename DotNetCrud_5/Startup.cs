@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,14 @@ namespace DotNetCrud_5
                 .GetConnectionString("DefaultConnection"))
 
             ) ;
+            services.AddMvc().AddNToastNotifyToastr(new NToastNotify.ToastrOptions()
+            {
+                ProgressBar = true,
+                PositionClass = ToastPositions.TopRight,
+                CloseButton = true,
+                PreventDuplicates = true,
+            }) ;
+            
 
             services.AddControllersWithViews();
         }

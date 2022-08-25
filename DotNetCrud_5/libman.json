@@ -3,13 +3,20 @@
   "defaultProvider": "cdnjs",
   "libraries": [
     {
-      "provider": "cdnjs",
       "library": "bootstrap-icons@1.9.1",
       "destination": "wwwroot/lib/bootstrap-icons/",
       "files": [
         "font/fonts/bootstrap-icons.woff",
         "font/fonts/bootstrap-icons.woff2",
         "font/bootstrap-icons.min.css"
+      ]
+    },
+    {
+      "library": "bootstrap-datepicker@1.9.0",
+      "destination": "wwwroot/lib/bootstrap-datepicker/",
+      "files": [
+        "js/bootstrap-datepicker.min.js",
+        "css/bootstrap-datepicker.min.css"
       ]
     }
   ]
