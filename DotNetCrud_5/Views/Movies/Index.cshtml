@@ -26,7 +26,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
-    <div class="col-12">
+    <div class="col-12 parr">
         <div class="card mb-3" >
             <div class="row no-gutters">
                 @* To Convert Image To Background Image ==> *@
@@ -52,7 +52,7 @@
 
                             </div>
                             <div>
-                                <a asp-action="Delete" asp-route-Id="@item.Id" onclick="return confirm(`delete @item.Title`)" class="btn btn-danger text-white btn-sm" >
+                                <a href="javascript:;" class="btn btn-danger text-white btn-sm jsdelete" data-id="@item.Id">
                                     <i class="bi bi-trash"></i>
 
                                     Delete
@@ -82,3 +82,26 @@
     }
 </div>
     
+@section Scripts{
+    <script>
+       $(document).ready(function () {
+            $(".jsdelete").on("click", function () {
+                var btn = $(this);
+                var res = confirm(`are you sure to delete this movie?`);
+                if (res) {
+                    $.ajax({
+                        url: "/Movies/Delete/" + btn.data("id"),
+                        success: function () {
+                            btn.parent(".parr").fadeOut();
+                            toastr.success("Movies Deleted");
+                        },
+                        error: function () {
+                            toastr.error("Something waNT Wrong!");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+            }

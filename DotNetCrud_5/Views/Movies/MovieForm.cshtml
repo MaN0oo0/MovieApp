@@ -3,13 +3,13 @@
 }
 @model MovieVM
 <h2>
-    @(Model.id>0 ? "Edit": "Create New") Movie &nbsp;<i class="bi bi-film"></i>
+    @(Model.id > 0 ? "Edit": "Create New") Movie &nbsp;<i class="bi bi-film"></i>
 </h2>
 
 <hr />
 <div class="row justify-content-between">
     <div class="col-md-4">
-        <form asp-action="@(Model.id>0 ? "Update" :"Create")" enctype="multipart/form-data" method="post">
+        <form asp-action="@(Model.id > 0 ? "Update" :"Create")" enctype="multipart/form-data" method="post">
             <input type="hidden" asp-for="id" />
             <div class="form-group">
                 <label asp-for="Title"></label>
@@ -45,10 +45,10 @@
                 <span asp-validation-for="Poster" class="text-danger"></span>
             </div>
 
-            <center class=" p-3">
+            <center class="p-3">
                 <button type="submit" class="btn btn-primary w-50 mb-3"><i class="bi bi-plus">&nbsp; @(Model.id > 0 ? "Update": "Add")</i></button>
                 <a class="btn btn-secondary w-50 mb-3" asp-action="Index"> <i class="bi bi-arrow-return-left">&nbsp; Return</i></a>
-                <button type="reset" class="btn btn-warning  w-50" onclick="confirm(` Do You Want To Delete Form Data `)"><i class="bi bi-x-circle">&nbsp; Clear</i> </button>
+                <input type="reset" class="btn btn-warning  w-50" onclick="return confirm(` Do You Want To Delete Form Data `)" value="Clear"/>
             </center>
 
 

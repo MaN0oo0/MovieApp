@@ -23,7 +23,7 @@ namespace DotNetCrud_5.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var Movies = await db.Movies.ToListAsync();
+            var Movies = await db.Movies.OrderByDescending(m=>m.Rate).ToListAsync();
             return View(Movies);
         }
         #region Create
@@ -102,11 +102,14 @@ namespace DotNetCrud_5.Controllers
         #region Handell Delete
         public async Task<IActionResult> Delete(int Id)
         {
-            
+            if (Id == null)
+                return BadRequest();
             var OldData=await db.Movies.FindAsync(Id);
+            if (OldData == null)
+                return NotFound();
             db.Movies.Remove(OldData);
             db.SaveChanges();
-            return RedirectToAction("index");
+            return Ok();
         }
         #endregion
 
@@ -203,6 +206,20 @@ namespace DotNetCrud_5.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        #endregion
+
+        #region Details
+
+        public async Task<IActionResult> Details(int id)
+        {
+            if (id == null)
+                return BadRequest();
+            var data = await db.Movies.Include(m=>m.Genre).SingleOrDefaultAsync(m=>m.Id==id);
+            if (data == null)
+                return NotFound();
+            return View(data);
+        }
 
         #endregion
     }

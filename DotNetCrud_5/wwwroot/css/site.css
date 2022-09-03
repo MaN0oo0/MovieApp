@@ -78,3 +78,6 @@ body {
     .poster:hover {
         transform: rotate(3deg) scale(1.1);
     }
+    .mt-60-px{
+        margin-top:60px;
+    }
